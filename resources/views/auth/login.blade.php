@@ -1,47 +1,98 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="en">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    <!-- Meta -->
+    <meta name="description" content="Marketplace for Hospital Management">
+    <meta property="og:title" content="Hospital Management">
+    <meta property="og:description" content="Marketplace for Hospital Management">
+    <meta property="og:type" content="Website">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}">
+
+    <!-- *************
+			************ CSS Files *************
+		************* -->
+    <link rel="stylesheet" href="{{ asset('assets/fonts/remix/remixicon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.min.css ') }}">
+
+</head>
+
+<body class="login-bg">
+
+    <!-- Container starts -->
+    <div class="container">
+
+        <!-- Auth wrapper starts -->
+        <div class="auth-wrapper">
+
+            <!-- Form starts -->
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="auth-box">
+                    <a href="index.html" class="auth-logo mb-4">
+                        <img src="{{ asset('assets/images/logo-dark.svg') }} " alt="Bootstrap Gallery">
+                    </a>
+
+                    <h4 class="mb-4">Login</h4>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email">Your email <span class="text-danger">*</span></label>
+                        <input type="email" id="email" name="email" :value="old('email')" class="form-control" placeholder="Enter your email" autofocus>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label" for="pwd">Your password <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <input type="password" id="password" class="form-control" placeholder="Enter password" name="password" required>
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="ri-eye-line text-primary" id="toggleIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    @if (Route::has('password.request'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                    @endif
+
+                    <div class="mb-3 d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <!-- <a href="{{ url('register') }}" class="btn btn-secondary">Not registered? Signup</a> -->
+                    </div>
+
+                </div>
+
+            </form>
+            <!-- Form ends -->
+
         </div>
+        <!-- Auth wrapper ends -->
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    </div>
+    <!-- Container ends -->
+    <script>
+        document.getElementById("togglePassword").addEventListener("click", function() {
+            const passwordInput = document.getElementById("password");
+            const icon = document.getElementById("toggleIcon");
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.classList.remove("ri-eye-line");
+                icon.classList.add("ri-eye-off-line"); // switch to eye-off icon
+            } else {
+                passwordInput.type = "password";
+                icon.classList.remove("ri-eye-off-line");
+                icon.classList.add("ri-eye-line"); // switch back to eye
+            }
+        });
+    </script>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+</body>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>
