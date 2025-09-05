@@ -26,6 +26,14 @@
             </li>
 
             {{-- Admin only --}}
+
+            <li>
+                <a href="{{ route('permissions.index') }}">
+                    <i class="ri-settings-5-line"></i>
+                    <span class="menu-text">Permissions</span>
+                </a>
+            </li>
+
             @role('admin')
             <li class="treeview">
                 <a href="#!">

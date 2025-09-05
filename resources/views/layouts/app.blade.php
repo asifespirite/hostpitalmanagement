@@ -17,7 +17,7 @@
     <link href="{{ asset('assets/fonts/remix/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/overlay-scroll/OverlayScrollbars.min.css') }}" rel="stylesheet">
-
+    @stack('css')
 
 </head>
 
@@ -82,8 +82,8 @@
     <script src="{{ asset('assets/vendor/apex/custom/home/earnings.js') }}"></script>
     <script src="{{ asset('assets/vendor/apex/custom/home/gender-age.js') }}"></script>
     <script src="{{ asset('assets/vendor/apex/custom/home/claims.js') }}"></script>
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
     @stack('scripts')
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
 
 </body>
 

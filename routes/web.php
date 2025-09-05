@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\PermiassionController;
+use App\Http\Controllers\PermissionController;
 
 
 Route::get('/', function () {
@@ -23,7 +23,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/permissions/create', [PermiassionController::class, 'create'])->name('permissions.create');
+    Route::get('/permission/create', [PermissionController::class, 'create'])->name('permissions.create');
+    Route::get('/permission/edit/{id}', [PermissionController::class, 'edit'])->name('permissions.edit');
+    Route::post('/permission/store', [PermissionController::class, 'store'])->name('permissions.store');
+    Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions.index');
+    Route::put('/permission/update/{id}', [PermissionController::class, 'update'])->name('permissions.update');
+    Route::get('permission/list', [PermissionController::class, 'list'])->name('permission.list');
 });
 
 require __DIR__ . '/auth.php';

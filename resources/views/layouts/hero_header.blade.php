@@ -8,7 +8,7 @@
              <a href="index.html">Home</a>
          </li>
          <li class="breadcrumb-item text-primary" aria-current="page">
-             Dashboard
+             @yield('title', 'Dashboard')
          </li>
      </ol>
      <!-- Breadcrumb ends -->
